@@ -1,0 +1,17 @@
+{
+  "name": "openapi-to-flow-example",
+  "version": "0.0.1",
+  "description": "Example of generating Flow types definitions from OpenAPI specification, using https://github.com/yayoc/swagger-to-flowtype tool",
+  "main": "index.js",
+  "scripts": {
+    "update-flow-types": "node get-remote-spec.js; npx swagger-to-flowtype ./apiSpecs/petStore.yaml",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "apiSpecUrl": "https://petstore.swagger.io/v2/swagger.yaml",
+  "apiSpecVersion": "",
+  "devDependencies": {
+    "swagger-to-flowtype": "^0.3.0"
+  }
+}
