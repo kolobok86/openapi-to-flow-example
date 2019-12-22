@@ -1,3 +1,4 @@
 /secret-keys.json
 /node_modules
 /.vscode/*
+/apiSpecs/_secretKeys.json
