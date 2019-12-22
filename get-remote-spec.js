@@ -49,7 +49,9 @@ async function fetchAndGenType(specUrl, specApiKey, specFileName) {
 
 
 async function generateFlowType (specFilePath, outputTypePath) {
-  const sp = spawn('npx', ['swagger-to-flowtype', specFilePath, '-d', outputTypePath ], { shell: true });
+  // --check-required means that not-required properties will have Maybe type
+  // more info: https://github.com/yayoc/swagger-to-flowtype#swagger-to-flowtype
+  const sp = spawn('npx', ['swagger-to-flowtype', specFilePath, '-d', outputTypePath, '--check-required'], { shell: true });
 
   sp.stdout.on('data', (data) => {
     console.log(`Processing ${specFilePath}: ${data}`);
