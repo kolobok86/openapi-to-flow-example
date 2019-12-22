@@ -6,7 +6,7 @@
   "scripts": {
     "prepublish": "npm run update-flow-types",
     "start": "node lib/index.js",
-    "update-flow-types": "node get-remote-spec.js",
+    "update-flow-types": "node typeUtils/generate-flow-types.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "flow-remove-types src/ -d lib/",
     "prepare": "npm run build",

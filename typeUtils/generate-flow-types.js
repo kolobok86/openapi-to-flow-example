@@ -4,8 +4,8 @@ const fs = require('fs');
 const path = require('path');
 const { spawn, fork } = require('child_process');
 
-const specsConfig = require('./apiSpecs/_specsConfig.json');
-const secKeys = require('./apiSpecs/_secretKeys.json');
+const specsConfig = require('./specsConfig.json');
+const secKeys = require('./apiSecretKeys.json');
 
 
 const specsDirPath = './apiSpecs';

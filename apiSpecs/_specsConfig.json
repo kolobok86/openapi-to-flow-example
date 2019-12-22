@@ -1,9 +1,0 @@
-{
-  "apiSpecs": [
-    {
-      "url": "https://petstore.swagger.io/v2/swagger.yaml",
-      "version": "",
-      "fileName": "PetStore"
-    }
-  ]
-}
