@@ -5,7 +5,7 @@ const path = require('path');
 const { spawn, fork } = require('child_process');
 
 const specsConfig = require('./apiSpecs/_specsConfig.json');
-const secKeys = require('./secret-keys.json');
+const secKeys = require('./apiSpecs/_secretKeys.json');
 
 
 const specsDirPath = './apiSpecs';
@@ -20,17 +20,17 @@ specsConfig.apiSpecs.forEach(async (spec) => {
   const specVersion = spec.version;
   const specFileName = spec.fileName;
   const specFullUrl = `${specUrl}${ specVersion ? '/' + specVersion : '' }`;
+  const specApiKey = secKeys.apiSecretKeys[specUrl] || null;
 
   // process specs from specsConfig asynchronously
-  fetchAndGenType(specFullUrl, specFileName);
+  fetchAndGenType(specFullUrl, specApiKey, specFileName);
 });
 
 
-
-async function fetchAndGenType(specUrl, specFileName) {
+async function fetchAndGenType(specUrl, specApiKey, specFileName) {
 
   const result = { apiSpecPath: null, error: null };
-  await fetchRemoteSpec(specUrl, specFileName, result);
+  await fetchRemoteSpec(specUrl, specApiKey, specFileName, result);
 
   const { apiSpecPath, error } = result;
   if (apiSpecPath) {
@@ -61,11 +61,18 @@ async function generateFlowType (specFilePath, outputTypePath) {
 }
 
 
-async function fetchRemoteSpec (specUrl, specFileName, resultObj) {
+async function fetchRemoteSpec (specUrl, specApiKey, specFileName, resultObj) {
   const promise = new Promise((resolve, reject) => {
     const webClient = (specUrl.startsWith('https://')) ? https : http;
-    webClient.get(specUrl, (res) => {
 
+    const reqOptions = {};
+    if (specApiKey) {
+      reqOptions.headers = {
+        'Authorization': specApiKey
+      };
+    }
+
+    webClient.get(specUrl, reqOptions, (res) => {
       res.setEncoding(specEncoding);
       let resBody = '';
 
