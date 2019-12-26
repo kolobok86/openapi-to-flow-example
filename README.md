@@ -6,7 +6,7 @@ This is example of how one can set up automatic generating of Flow types definit
 
 ## Basic preparations
 
-In this example, specifications are meant to be fetched by HTTP, and it is up to user to provide such ability. Such tools as on-premise HTTP server (Apache, Nginx, etc.), GitHub Pages or SwaggerHub can fit that purpose. The idea is to treat these downloadable specs as single source of truth across several related projects (say, frontend and backend, or several boundled microservices).
+In this example, specifications are meant to be fetched by HTTP, and it is up to user to provide such ability. Such tools as on-premise HTTP server (Apache, Nginx, etc.), Amazon S3 storage, GitHub Pages either SwaggerHub — all can fit that purpose. The idea is to treat these downloadable specs as single source of truth across several related projects (say, frontend and backend, or several boundled microservices).
 
 
 ## Generating of Flow types definitions
@@ -48,9 +48,11 @@ This file reflects current API versions used in actual development branch, and s
 `version` is optional parameter that is added to url. That is useful when API is stored in SwaggerHub, where API’s can be fetched by url of a type: `https://api.swaggerhub.com/apis/{username}/{specApiName}/{apiSpecVersion}`. Same way, whether you set up hosting API specifications yourself, it is recommended that you distinguish them by versions too, so that different branches could rely on different API versions. If new version of API is published in common HTTP source, version number should be updated here in the list.
 
 
-`fileName` is name with that API specification will be saved on your local disk. File extension (_.json_ or _.yaml_) will be added based on Content-Type header of http response. So, it will be _.yaml_ for `Content-Type=application/yaml`, and _.json_ for `Content-Type=application/json`. If _Content-Type_ response header is different from mentioned here, or is missed, _.json_ is picked as default extension, and warning message displayed in console:
+`fileName` is name with that API specification will be saved on your local disk in _./apiSpecs_ directory. File extension (_.json_ or _.yaml_) will be added based on Content-Type header of http response. So, it will be _.yaml_ for `Content-Type=application/yaml`, and _.json_ for `Content-Type=application/json`. If _Content-Type_ response header is different from mentioned here, or is missed, _.json_ is picked as default extension, and warning message displayed in console:
 
 `Warning: Content-Type of response is not "application/yaml" neither "application/json". Assuming that spec is in JSON format`
+
+Also, Flow types definition, generated of the specification, will get this file name too, and saved in _./types_ directory with ".js" extension.
 
 
 Downloaded specifications are saved in _/apiSpecs_ directory. The recommendation is to add these specifications to VCS. This way, you can easily trace changes introduced in different API versions, without re-fetching them every time.

@@ -84,7 +84,6 @@ async function fetchRemoteSpec (specUrl, specApiKey, specFileName, resultObj) {
 
       res.on('end', () =>{
         if (res.statusCode === 200) {
-          let fetchError = false;
           let dataToWrite = resBody;
 
           let specFileExt;
