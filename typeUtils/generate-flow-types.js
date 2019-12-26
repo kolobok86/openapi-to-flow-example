@@ -88,11 +88,12 @@ async function fetchRemoteSpec (specUrl, specApiKey, specFileName, resultObj) {
           let dataToWrite = resBody;
 
           let specFileExt;
-          switch (res.headers['content-type']) {
-            case 'application/yaml':
+          const contentType = res.headers['content-type'].toLowerCase();
+          switch (true) {
+            case contentType.includes('application/yaml'):
               specFileExt = '.yaml';
               break;
-            case 'application/json':
+            case contentType.includes('application/json'):
               specFileExt = '.json';
               // format JSON spec to printable format, for simpler grabbing changes between versions
               try {
