@@ -91,7 +91,7 @@ _/typeUtils/apiSecretKeys.json_:
   }
 }
 ```
-_In real life, API specifications https://petstore.swagger.io/v2/swagger.yaml and https://petstore.swagger.io/v2/swagger.json are publicly available without any authentication, here this url is picked just as example._
+_In fact, API specifications https://petstore.swagger.io/v2/swagger.yaml and https://petstore.swagger.io/v2/swagger.json are publicly available without any authentication, here this url is picked just as example._
 
 
 ## Example of using the generated types
