@@ -99,7 +99,7 @@ _In real life, API specifications https://petstore.swagger.io/v2/swagger.yaml an
 And finally, _/src/index.js_ is simple example of using generated Flow types in project code. To run it, start in console:
 
 ```bash
-npm run build; npm run start;
+npm run build && npm run start
 ```
 
 As _/src/index.js_ contains Flow types, the code should be transformed into javascript code before it can be executed. For sake of simplicity, it is accomplished with _flow-remove-types_ package in this repo. In real big projects, _babel_ may be better choise, as it has many other useful features in addition to transpilation of types-enabled code into clean javascript (please refer to Flow documentation here https://flow.org/en/docs/install/ for setting up Babel in your project).
