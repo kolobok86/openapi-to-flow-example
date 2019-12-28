@@ -17,14 +17,14 @@ Each of the APIs used on the project is:
 - and then Flow types are generated of saved specification file, using _swagger-to-flowtype_ package.
 
 
-These actions are performed in _/typeUtils/generate-flow-types.js_ . It is invoked in _npm_ scripts listed in _package.json_ . Types generation is boundled to `prepublish` npm script, so types are updated on every run of `npm install` command. To update types without additional actions, run `npm run update-flow-types`.
+These actions are performed in _/typeUtils/generate-flow-types.js_ . It is invoked in _npm_ scripts listed in _package.json_ . Types generation is boundled to `prepare` npm script, so types are updated on every run of `npm install` command. To update types without additional actions, run `npm run update-flow-types`.
 
 _package.json_:
 ```json
   "scripts": {
-    "prepublish": "npm run update-flow-types",
-    . . . . .
     "update-flow-types": "node typeUtils/generate-flow-types.js",
+    . . . . .
+    "prepare": "npm run update-flow-types",
     . . . . .
   }
 ```
