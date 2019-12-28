@@ -4,9 +4,19 @@ const fs = require('fs');
 const path = require('path');
 const { spawn, fork } = require('child_process');
 
-const specsConfig = require('./specsConfig.json');
-const secKeys = require('./apiSecretKeys.json');
+const specsConfig = require(path.join(__dirname, 'specsConfig.json'));
 
+// apiSecretKeys.json should be created of apiSecretKeys.json.example by the user manually,
+// as it is supposed to contain secret keys, thus is NOT added to repository
+let secKeys = null;
+try {
+  secKeys = require(path.join(__dirname, 'apiSecretKeys.json'));
+} catch {
+  console.warn(
+    'WARNING: No typeUtils/apiSecretKeys.json config file found. ' 
+    + 'Whether you need to pass security tokens to fetch API spec, '
+    + 'please create the config of apiSecretKeys.json.example\n');
+}
 
 const specsDirPath = './apiSpecs';
 const typesDirPath = './types';
@@ -20,7 +30,11 @@ specsConfig.apiSpecs.forEach(async (spec) => {
   const specVersion = spec.version;
   const specFileName = spec.fileName;
   const specFullUrl = `${specUrl}${ specVersion ? '/' + specVersion : '' }`;
-  const specApiKey = secKeys.apiSecretKeys[specUrl] || null;
+  
+  let specApiKey = null;
+  if (secKeys) {
+    specApiKey = secKeys.apiSecretKeys[specUrl] || null;
+  }
 
   // process specs from specsConfig asynchronously
   fetchAndGenType(specFullUrl, specApiKey, specFileName);

@@ -4,12 +4,11 @@
   "description": "Example of generating Flow types definitions from OpenAPI specification, using https://github.com/yayoc/swagger-to-flowtype tool",
   "main": "lib/index.js",
   "scripts": {
-    "prepublish": "npm run update-flow-types",
     "start": "node lib/index.js",
     "update-flow-types": "node typeUtils/generate-flow-types.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "flow-remove-types src/ -d lib/",
-    "prepare": "npm run build",
+    "prepare": "npm run update-flow-types",
     "flow": "flow"
   },
   "author": "kolobok86",
